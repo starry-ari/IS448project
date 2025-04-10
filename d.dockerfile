@@ -9,3 +9,4 @@ RUN a2enmod rewrite
 
 # Expose web port
 EXPOSE 80
+ 
