@@ -1,0 +1,73 @@
+
+
+<!--Login Screen--> 
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<title> Account Login </title>
+<meta charset="UTF-8">
+<link rel="stylesheet" href="style.css" type="text/css"/>
+</head>
+
+<body>
+  <!-- Navigation bar -->
+  <div class="navbar">
+    <ul>
+        <!-- Website logo -->
+        <li><img class="logo" src="./assets/images/logo.png"/> </li>
+        <!-- Navigation links -->
+        <li><a href="home.php">Home</a></li>
+        <li><a href="CreateProfile.html">Create Account</a></li>
+        <li><a href="albums.php">Albums</a></li>
+    </ul>
+
+    <!-- Search bar -->
+    <div class="search">
+        <input type="text" id="searchbox" placeholder="Search for albums here..." onkeypress="handleKeyPress(event)">
+    </div>
+
+    <!-- Profile picture placeholder-->
+    <img id="pfp" src="./assets/images/pfp.png" alt="Profile Picture">
+
+    <!-- Sign In -->
+    <a id="Hsignin" href="./AccountLogin.html">Sign In</a>
+</div>
+
+
+<!-- Again, Placeholder PHP filename-->
+<form method="POST" action="login.php" ">
+<!-- Gives the buttons their styling -->
+  <div class="buttonStyle">
+    
+    <div class="large-container">
+      <div class="large-header">
+      <h1>Welcome Back!</h1> 
+  </div>
+	<!-- Enters in user credentials -->
+  <span>
+  <div class="large-body">
+
+    <h4>Enter your username and password.</h4>
+    <label for="user"><b>Username</b></label>
+    <input class="acc" type="text" placeholder="Enter Username" name="user" required>
+    <label for="psw"><b>Password</b></label>
+    <input class="acc" type="password" placeholder="Enter Password" name="psw" required>
+      <br />	
+    
+	  <!-- Adds the special styling for the submit button -->
+      <button type="submit" class="submitButton">Log In</button>
+      <p>New to the site?</p>
+      <a href="CreateProfile.html">Sign up</a>
+    </div>
+  </span>
+
+    </div>
+  </div>
+</form>
+</body>
+
+
+
+
+</html>
