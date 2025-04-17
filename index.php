@@ -40,7 +40,7 @@ session_start();
             <!-- Website logo -->
             <li><img class="logo" src="./assets/images/logo.png"/> </li>
             <!-- Navigation links -->
-            <li><a href="home.php">Home</a></li>
+            <li><a href="index.php">Home</a></li>
             <li><a href="albums.php">Albums</a></li>
         </ul>
 
@@ -59,7 +59,7 @@ session_start();
       <!-- Website logo -->
       <li><img class="logo" src="./assets/images/logo.png"/> </li>
       <!-- Navigation links -->
-      <li><a href="home.php">Home</a></li>
+      <li><a href="index.php">Home</a></li>
       <li><a href="CreateProfile.html" >Create Account</a></li>
       <li><a href="albums.php">Albums</a></li>
   </ul>
