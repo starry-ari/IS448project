@@ -2,6 +2,11 @@
 
 session_start();
 // Connect to the database
+$host = getenv('host');
+$user = getenv('user');
+$pass = getenv('pass');
+$dbname = getenv('dbname');
+$port = getenv('port') ?: 3306;
 $db = mysqli_connect($host, $user, $pass, $dbname, $port);?>
 
 <!DOCTYPE html>
