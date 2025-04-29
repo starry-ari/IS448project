@@ -11,7 +11,7 @@ $pass = getenv('DB_PASS');
 
 $dbConn = new mysqli($host, $user, $pass, $dbname, $port);
 
-$dbConn= mysqli_connect("studentdb-maria.gl.umbc.edu", "arichar1", "arichar1", "arichar1");
+//$dbConn= mysqli_connect("studentdb-maria.gl.umbc.edu", "arichar1", "arichar1", "arichar1");
 
 if ($dbConn->connect_error) {
     die("Error: Could not connect to MySQL - " . $dbConn->connect_error );
