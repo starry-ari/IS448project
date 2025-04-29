@@ -4,8 +4,7 @@
         session_start();
     
         #Connect to mySQL database.
-        $db = mysqli_connect("studentdb-maria.gl.umbc.edu","arichar1","arichar1","arichar1");
-    
+        $dbConn = new mysqli($host, $user, $pass, $dbname, $port);
         if (mysqli_connect_errno())
             exit("Error - Could not connect to MySQL");
             $username = htmlspecialchars($_POST['user']);

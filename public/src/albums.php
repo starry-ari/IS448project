@@ -2,8 +2,7 @@
 
 session_start();
 // Connect to the database
-$db = mysqli_connect("studentdb-maria.gl.umbc.edu", "arichar1", "arichar1", "arichar1");
-?>
+$db = new mysqli($host, $user, $pass, $dbname, $port);?>
 
 <!DOCTYPE html>
 

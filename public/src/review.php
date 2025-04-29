@@ -4,8 +4,7 @@ session_start();
 $username = $_SESSION['username'];
 
 
-$db = mysqli_connect("studentdb-maria.gl.umbc.edu","arichar1","arichar1","arichar1");
-$review = $_POST['review'];
+$dbConn = new mysqli($host, $user, $pass, $dbname, $port);$review = $_POST['review'];
 $albumName = $_POST['albumName'];
 $rating = $_POST['star'];
 

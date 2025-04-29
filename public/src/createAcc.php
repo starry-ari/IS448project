@@ -9,12 +9,12 @@ $dbname = getenv('DB_NAME');
 $user = getenv('DB_USER');
 $pass = getenv('DB_PASS');
 
-$dbConn = new mysqli($host, $user, $pass, $dbname, $port);
+$db = new mysqli($host, $user, $pass, $dbname, $port);
 
-//$dbConn= mysqli_connect("studentdb-maria.gl.umbc.edu", "arichar1", "arichar1", "arichar1");
+//$db= mysqli_connect("studentdb-maria.gl.umbc.edu", "arichar1", "arichar1", "arichar1");
 
-if ($dbConn->connect_error) {
-    die("Error: Could not connect to MySQL - " . $dbConn->connect_error );
+if ($db->connect_error) {
+    die("Error: Could not connect to MySQL - " . $db->connect_error );
 }
 
 
@@ -23,9 +23,9 @@ $username = htmlspecialchars($_POST['user']);
 $password = htmlspecialchars($_POST['psw']);
 
 
-$email = mysqli_real_escape_string($dbConn, $email);
-$username = mysqli_real_escape_string($dbConn, $username);
-$password = mysqli_real_escape_string($dbConn, $password);
+$email = mysqli_real_escape_string($db, $email);
+$username = mysqli_real_escape_string($db, $username);
+$password = mysqli_real_escape_string($db, $password);
 
 
 // Validate input (basic example)
@@ -44,15 +44,15 @@ CREATE TABLE IF NOT EXISTS users (
     username VARCHAR(50) NOT NULL UNIQUE,
     password VARCHAR(255) NOT NULL
 )";
-mysqli_query($dbConn, $createTable);
+mysqli_query($db, $createTable);
 
-if (mysqli_error($dbConn)) {
-    die("Error creating table: " . mysqli_error($dbConn));
+if (mysqli_error($db)) {
+    die("Error creating table: " . mysqli_error($db));
 }
 
 // Check if the username already exists
 $sameUser = "SELECT * FROM users WHERE email = '$email' OR username = '$username'";
-$result = mysqli_query($dbConn, $sameUser);
+$result = mysqli_query($db, $sameUser);
 
 if (mysqli_num_rows($result) > 0) {
     echo "<span id='error'>Error: Username is already taken. Please choose a different username.</span>";
@@ -64,9 +64,9 @@ else{
 
 $query = "INSERT INTO users (email, username, password) VALUES ('$email', '$username', '$password')";
 
-if (mysqli_query($dbConn, $query)) {
+if (mysqli_query($db, $query)) {
 
-    $_SESSION['user_id'] = mysqli_insert_id($dbConn);
+    $_SESSION['user_id'] = mysqli_insert_id($db);
     $_SESSION['username'] = $username;
     $_SESSION['email'] = $email;
     $_SESSION['password'] = $password;
@@ -76,7 +76,7 @@ if (mysqli_query($dbConn, $query)) {
     exit();
     
 } else {
-    die("Error: " . mysqli_error($dbConn));
+    die("Error: " . mysqli_error($db));
 }
 
 }
