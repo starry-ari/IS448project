@@ -1,12 +1,15 @@
-# Use official PHP + Apache image
-FROM php:8.2-apache
 
-# Copy all project files into Apache web root
-COPY . /var/www/html/
+FROM php:8.2-cli
 
-# Enable rewrite module (optional)
-RUN a2enmod rewrite
 
-# Expose web port
-EXPOSE 80
- 
+RUN docker-php-ext-install mysqli
+
+
+WORKDIR /src/home.php
+
+COPY . .
+
+
+EXPOSE 8080
+
+CMD ["php", "-S", "0.0.0.0:8080", "-t", "public"]
