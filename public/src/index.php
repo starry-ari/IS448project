@@ -3,7 +3,6 @@ IS 448 High Fidelity project
  home.html file
 -->
 <?php
-
 session_start();
 
 ?>
