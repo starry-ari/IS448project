@@ -4,7 +4,7 @@
         session_start();
     
         #Connect to mySQL database.
-        $dbConn = new mysqli($host, $user, $pass, $dbname, $port);
+        $dbConn = mysqli_connect($host, $user, $pass, $dbname, $port);
         if (mysqli_connect_errno())
             exit("Error - Could not connect to MySQL");
             $username = htmlspecialchars($_POST['user']);

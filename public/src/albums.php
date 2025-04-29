@@ -2,7 +2,7 @@
 
 session_start();
 // Connect to the database
-$db = new mysqli($host, $user, $pass, $dbname, $port);?>
+$db = mysqli_connect($host, $user, $pass, $dbname, $port);?>
 
 <!DOCTYPE html>
 
