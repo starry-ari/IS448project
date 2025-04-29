@@ -45,7 +45,7 @@
                            
                             $_SESSION['username']=$username;
                          
-                                   header("Location: ./home.php");
+                                   header("Location: ./index.php");
                                    exit();   
                      
                         }

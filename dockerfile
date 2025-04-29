@@ -1,14 +1,7 @@
-
 FROM php:8.2-cli
 
-
-RUN docker-php-ext-install mysqli
-
-
-WORKDIR /src/index.php
-
+WORKDIR /var/www/html
 COPY . .
-
 
 EXPOSE 8080
 
