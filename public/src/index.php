@@ -25,8 +25,7 @@ session_start();
     
 
     <!-- Link to the external CSS stylesheet -->
-    <link rel="stylesheet" href="style.css">
-</head>
+    <link rel="stylesheet" href="public/src/style.css">
 <body>
     
     <!-- Navigation bar -->
