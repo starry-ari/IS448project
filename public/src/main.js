@@ -117,7 +117,7 @@ fetch('https://api.spotify.com/v1/browse/new-releases?', {
        <h2>${album.name}</h2> </span> <br>`;
         query += newA;
    }
-   console.log(KEY);
+  // console.log(KEY);
 
 
 
