@@ -2,9 +2,16 @@
 // Start the session
 session_start();
 $username = $_SESSION['username'];
-$db = mysqli_connect("studentdb-maria.gl.umbc.edu","arichar1","arichar1","arichar1");
 
-?>
+// Connect to the database
+$host = getenv('host');
+$user = getenv('user');
+$pass = getenv('pass');
+$dbname = getenv('dbname');
+$port = getenv('port') ?: 3306;
+$db = mysqli_connect($host, $user, $pass, $dbname, $port);?>
+
+
 
 <!DOCTYPE html>
 <html lang="en">
