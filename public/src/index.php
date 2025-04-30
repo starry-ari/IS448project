@@ -31,14 +31,14 @@ IS 448 High Fidelity project
     <?php 
   if (isset($_SESSION['username'])) { 
   
-     echo   '  <div class="navbar">
+     echo   '<div class="navbar">
      
      <ul>
             <!-- Website logo -->
             <li><img class="logo" src="./assets/images/logo.png"/> </li>
             <!-- Navigation links -->
             <li><a href="index.php">Home</a></li>
-            <li><a href="/albums.php">Albums</a></li>
+            <li><a href="/public/src/albums.php">Albums</a></li>
         </ul>
 
         <!-- Search bar -->
