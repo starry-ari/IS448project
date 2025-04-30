@@ -8,15 +8,6 @@
  long run without having to enter in the album data manually.
 */
 
-/*PLEASE READ: run this command in terminal to generate spotify 
-api token. Tokens only last 1 hour, I'm planning on turning them 
-into refresh tokens after a bit of research: 
-
-curl -X POST "https://accounts.spotify.com/api/token" \
-     -H "Content-Type: application/x-www-form-urlencoded" \
-     -d "grant_type=client_credentials&client_id=c9db6796d96146fdbdb5ffe2b749cd70&client_secret=d71e8efe2b9b482fb04575527dc265af" 
-
-*/
 
 
 
