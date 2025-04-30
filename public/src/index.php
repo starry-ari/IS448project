@@ -38,7 +38,7 @@ IS 448 High Fidelity project
             <li><img class="logo" src="./assets/images/logo.png"/> </li>
             <!-- Navigation links -->
             <li><a href="index.php">Home</a></li>
-            <li><a href="/public/src/albums.php">Albums</a></li>
+            <li><a href="/albums.php">Albums</a></li>
         </ul>
 
         <!-- Search bar -->
