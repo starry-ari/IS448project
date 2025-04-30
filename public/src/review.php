@@ -16,7 +16,7 @@ $rating = $_POST['star'];
 
 
 
-if (mysqli_connect_errno())
+if ($db->connect_error)
 exit("Error - could not connect to MySQL");
 
 $createTable = "
@@ -27,7 +27,7 @@ CREATE TABLE IF NOT EXISTS reviews (
     rating INT(5)
 )";
 
-if (!mysqli_query($db, $createTable)) {
+if (!$db->query($createTable)) {
     exit("Error creating table: " . mysqli_error($db));
 }
 
@@ -36,7 +36,7 @@ if (!mysqli_query($db, $createTable)) {
 $q = "INSERT INTO reviews (user, albumName, review, rating)
 VALUES ('$username', '$albumName','$review','$rating' )";
 
-if (!mysqli_query($db, $q)) {
+if (!$db->query($q)) {
     echo "Error inserting review: " . mysqli_error($db);
 } else {
     header("Location: Profilepage.php");
@@ -51,5 +51,5 @@ if (!mysqli_query($db, $q)) {
 
 
 
-mysqli_close($db);
+$db->close();
 
