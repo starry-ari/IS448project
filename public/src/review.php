@@ -6,12 +6,6 @@ if (session_status() === PHP_SESSION_NONE) {
 
 // Check if user is logged in
 
-if (!$username) {
-    $username = "Sign In";
-}
-else{
-    $username = $_SESSION['username'];
-}
 
 // Connect to the database
 $host = getenv('host');
@@ -21,9 +15,6 @@ $dbname = getenv('dbname');
 $port = getenv('port') ?: 3306;
 $db = new mysqli($host, $user, $pass, $dbname, $port);
 
-$review = $_POST['review'];
-$albumName = $_POST['albumName'];
-$rating = $_POST['star'];
 
 
 
@@ -45,6 +36,9 @@ if (!$db->query($createTable)) {
 //Creating database
 mysqli_query($db, $createTable);
 
+$review = $_POST['review'];
+$albumName = $_POST['albumName'];
+$rating = $_POST['star'];
 
 $q = "INSERT INTO reviews (user, albumName, review, rating)
 VALUES ('$username', '$albumName','$review','$rating' )";
