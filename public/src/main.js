@@ -322,7 +322,7 @@ function getAlbum(aN){
 
    }
    function getAlbumReview(ajax){
-console.log(ajax.responseText);
+
    }
 
 function rating() {

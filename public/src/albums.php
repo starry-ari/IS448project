@@ -7,7 +7,7 @@ $user = getenv('user');
 $pass = getenv('pass');
 $dbname = getenv('dbname');
 $port = getenv('port') ?: 3306;
-$db = mysqli_connect($host, $user, $pass, $dbname, $port);?>
+$db = new mysqli($host, $user, $pass, $dbname, $port);?>
 
 <!DOCTYPE html>
 
