@@ -1,15 +1,23 @@
 <?php
 // Start the session
-session_start();	
-$username = $_SESSION['username'];
+if (session_status() === PHP_SESSION_NONE) {
+    session_start();
+}
+
+// Check if user is logged in
+$username = isset($_SESSION['username']) ? $_SESSION['username'] : null;
+if (!$username) {
+    exit("Error: User not logged in.");
+}
+
+// Connect to the database
 $host = getenv('host');
 $user = getenv('user');
 $pass = getenv('pass');
 $dbname = getenv('dbname');
 $port = getenv('port') ?: 3306;
-
 $db = new mysqli($host, $user, $pass, $dbname, $port);
-mysqli_query($db, $createTable);
+
 $review = $_POST['review'];
 $albumName = $_POST['albumName'];
 $rating = $_POST['star'];
@@ -32,7 +40,7 @@ if (!$db->query($createTable)) {
     exit("Error creating table: " . mysqli_error($db));
 }
 //Creating database
-
+mysqli_query($db, $createTable);
 
 
 $q = "INSERT INTO reviews (user, albumName, review, rating)
