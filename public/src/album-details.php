@@ -17,7 +17,7 @@ $user = getenv('user');
 $pass = getenv('pass');
 $dbname = getenv('dbname');
 $port = getenv('port') ?: 3306;
-$db = new mysqli($host, $user, $pass, $dbname, $port);
+mysqli_query($db, $createTable);
 
 ?>
 
