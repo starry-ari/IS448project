@@ -258,8 +258,8 @@ fetch(`https://api.spotify.com/v1/albums/${albumId}`, {
    document.querySelector("#albumDetails").innerHTML = query;
  aN = document.querySelector('#aN');
 
-aN.value = album.name +' - ' + album.artists[0].name;
-console.log(aN.value);
+aN = album.name +' - ' + album.artists[0].name;
+console.log(aN);
 
    //Adding album tracks:
 

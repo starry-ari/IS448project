@@ -122,7 +122,7 @@ $db = mysqli_connect($host, $user, $pass, $dbname, $port);
 
 $query = "SELECT * FROM reviews";
 
-$result = mysqli_query($db, $query);
+$result = $db->query($query);
 
 if (!$result) {
 
