@@ -10,6 +10,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'GET' && isset($_GET['albumR'])) {
     exit; 
     
 }
+include'review.php';
 
 // Connect to the database
 $host = getenv('host');
@@ -17,9 +18,7 @@ $user = getenv('user');
 $pass = getenv('pass');
 $dbname = getenv('dbname');
 $port = getenv('port') ?: 3306;
-
-$db = new mysqli($host, $user, $pass, $dbname, $port);
-mysqli_query($db, $createTable);
+$db = mysqli_connect($host, $user, $pass, $dbname, $port);
 
 ?>
 
@@ -124,7 +123,7 @@ mysqli_query($db, $createTable);
 
 $query = "SELECT * FROM reviews";
 
-$result = $db->query($query);
+$result = mysqli_query($db, $query);
 
 if (!$result) {
 
