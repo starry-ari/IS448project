@@ -16,9 +16,9 @@ $rating = $_POST['star'];
 
 
 
-if ($db->connect_error)
+if ($db->connect_error){
 exit("Error - could not connect to MySQL");
-
+}
 $createTable = "
 CREATE TABLE IF NOT EXISTS reviews (
     user CHAR(100),
@@ -30,7 +30,8 @@ CREATE TABLE IF NOT EXISTS reviews (
 if (!$db->query($createTable)) {
     exit("Error creating table: " . mysqli_error($db));
 }
-
+//Creating database
+mysqli_query($db, $createTable);
 
 
 $q = "INSERT INTO reviews (user, albumName, review, rating)
