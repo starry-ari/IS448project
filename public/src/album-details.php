@@ -10,7 +10,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'GET' && isset($_GET['albumR'])) {
     exit; 
     
 }
-include'review.php';
+
 
 // Connect to the database
 $host = getenv('host');
@@ -71,6 +71,7 @@ $db = mysqli_connect($host, $user, $pass, $dbname, $port);
             <a id="Hsignin" href="./Profilepage.php">' . htmlspecialchars($_SESSION['username']) . '</a>
             <a href="logout.php">Logout</a>
         </div>';
+        include'review.php';
     } else { 
         echo '
         <div class="navbar">
