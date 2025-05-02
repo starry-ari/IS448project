@@ -9,6 +9,7 @@ $dbname = getenv('dbname');
 $port = getenv('port') ?: 3306;
 
 $db = new mysqli($host, $user, $pass, $dbname, $port);
+mysqli_query($db, $createTable);
 $review = $_POST['review'];
 $albumName = $_POST['albumName'];
 $rating = $_POST['star'];
@@ -31,7 +32,7 @@ if (!$db->query($createTable)) {
     exit("Error creating table: " . mysqli_error($db));
 }
 //Creating database
-mysqli_query($db, $createTable);
+
 
 
 $q = "INSERT INTO reviews (user, albumName, review, rating)
