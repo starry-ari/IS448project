@@ -4,12 +4,8 @@ if (session_status() === PHP_SESSION_NONE) {
     session_start();
 }
 
-// Check if user is logged in
-$username = isset($_SESSION['username']) ? $_SESSION['username'] : null;
-if (!$username) {
-    exit("Error: User not logged in.");
-}
 
+$username = $_SESSION['username'];
 // Connect to the database
 $host = getenv('host');
 $user = getenv('user');
