@@ -216,7 +216,7 @@ const url = 'https://api.spotify.com/v1/search?q='+ encodeURIComponent(query) + 
 
 var aN;
 
-// ALBUM DETAILS PAGE
+//----------------ALBUM DETAILS PAGE ------------------
 
 function details(key){
     
@@ -250,7 +250,7 @@ fetch(`https://api.spotify.com/v1/albums/${albumId}`, {
 
    // Retrieving album name and cover image
    var albumC = album.images[0].url;
-   var pic = `<h2 >${album.name} - <br> ${album.artists[0].name}</h2><img class="albD" src="${albumC}" alt="${album.name} album" /> <br>`;
+   var pic = `<?php $albumR = ${album.name}?> <h2>${album.name} - <br> ${album.artists[0].name}</h2><img class="albD" src="${albumC}" alt="${album.name} album" /> <br>`;
    query += pic;
     
 

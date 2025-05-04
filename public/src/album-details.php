@@ -1,7 +1,7 @@
 <?php
 // Start the session
 session_start();
-
+/*
 if ($_SERVER['REQUEST_METHOD'] === 'GET' && isset($_GET['albumR'])) {
     $albumName = $_GET['albumR'];
 
@@ -10,7 +10,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'GET' && isset($_GET['albumR'])) {
     exit; 
     
 }
-
+*/
 
 // Connect to the database
 $host = getenv('host');
@@ -147,7 +147,7 @@ if (!$result) {
    
     <?php
 
-$query = "SELECT user, review, rating FROM reviews WHERE albumName = '". htmlspecialchars($_SESSION['albumR']). "'";
+$query = "SELECT user, review, rating FROM reviews WHERE albumName = $albumR ";
 $result2 = mysqli_query($db, $query);
 
 
