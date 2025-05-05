@@ -23,23 +23,18 @@ $port = getenv('port') ?: 3306;
 $db = mysqli_connect($host, $user, $pass, $dbname, $port);
 
 
-// Escape for use in SQL
-
-// Retrieve album name from GET or session
-$albumR = $_GET['albumR'] ?? $_SESSION['albumR'] ?? null;
-
-// Check for valid album name
-if (!$albumR) {
+if (isset($_GET['albumR'])) {
+    $albumR = $_GET['albumR'];
+    $_SESSION['albumR'] = $albumR;  
+} elseif (isset($_SESSION['albumR'])) {
+    $albumR = $_SESSION['albumR'];
+} else {
     echo "<h2>No album selected.</h2>";
     exit;
 }
 
-// Store in session for later use
-$_SESSION['albumR'] = $albumR;
 
-// Escape only after checking it exists
 $albumR = mysqli_real_escape_string($db, $albumR);
-
 ?>
 
 
