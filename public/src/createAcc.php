@@ -3,12 +3,11 @@
 session_start();
 
 // Connect to the RDS database
-$host = getenv('DB_HOST');  
-$port = getenv('DB_PORT') ?: '3306';
-$dbname = getenv('DB_NAME');
-$user = getenv('DB_USER');
-$pass = getenv('DB_PASS');
-
+$host = getenv('host');
+$user = getenv('user');
+$pass = getenv('pass');
+$dbname = getenv('dbname');
+$port = getenv('port') ?: 3306;
 $db = new mysqli($host, $user, $pass, $dbname, $port);
 
 
