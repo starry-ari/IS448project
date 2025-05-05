@@ -112,9 +112,7 @@ $db = mysqli_connect($host, $user, $pass, $dbname, $port);
                 
   
                 </script>
-                    <form method="post" action="review.php">
-    <input type="hidden" id="aN" name="albumName" />
-</form>
+                  
             </div>
             <div id="container2">
                 <h2>Song List:</h2>
