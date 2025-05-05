@@ -22,15 +22,15 @@ $dbname = getenv('dbname');
 $port = getenv('port') ?: 3306;
 $db = mysqli_connect($host, $user, $pass, $dbname, $port);
 
+
+// Escape for use in SQL
+$albumR = mysqli_real_escape_string($db, $albumR);
 $albumR = $_GET['albumR'] ?? $_SESSION['albumR'] ?? null;
 
 if (!$albumR) {
     echo "<h2>No album selected.</h2>";
     exit;
 }
-
-// Escape for use in SQL
-$albumR = mysqli_real_escape_string($db, $albumR);
 
 ?>
 
