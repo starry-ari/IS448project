@@ -1,7 +1,7 @@
 <?php
 // Start the session
 session_start();
-/*
+
 if ($_SERVER['REQUEST_METHOD'] === 'GET' && isset($_GET['albumR'])) {
     $albumName = $_GET['albumR'];
 
@@ -10,7 +10,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'GET' && isset($_GET['albumR'])) {
     exit; 
     
 }
-*/
+
 
 
 
@@ -23,15 +23,6 @@ $port = getenv('port') ?: 3306;
 $db = mysqli_connect($host, $user, $pass, $dbname, $port);
 
 
-if (isset($_GET['albumR'])) {
-    $albumR = $_GET['albumR'];
-    $_SESSION['albumR'] = $albumR;  
-} elseif (isset($_SESSION['albumR'])) {
-    $albumR = $_SESSION['albumR'];
-} else {
-    echo "<h2>No album selected.</h2>";
-    exit;
-}
 
 
 $albumR = mysqli_real_escape_string($db, $albumR);
