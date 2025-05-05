@@ -151,7 +151,7 @@ if (!$result) {
 </tr>
    
     <?php
-$albumR = $_POST["albumName"];
+
 $query = "SELECT user, review, rating FROM reviews WHERE albumName = $albumR ";
 $result2 = mysqli_query($db, $query);
 
