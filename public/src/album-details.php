@@ -96,8 +96,9 @@ $db = mysqli_connect($host, $user, $pass, $dbname, $port);
     ?>
 
     <!-- Main container for album details -->
+     <form method="post" action="review.php">
     <input type="hidden" id="aN" name="albumName" />
-
+</form>
 
     <div id="container">
         <div id="container3">
