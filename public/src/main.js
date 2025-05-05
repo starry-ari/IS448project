@@ -260,6 +260,7 @@ fetch(`https://api.spotify.com/v1/albums/${albumId}`, {
  aN = document.querySelector('#aN');
 
 aN = album.name +' - ' + album.artists[0].name;
+console.log(aN);
 
    //Adding album tracks:
 
@@ -314,7 +315,7 @@ function favorite() {
 //Ajax code implementation for album name.
 
 function getAlbum(aN){
-    var nameA=aN;
+    var nameA=aN.value;
     console.log(nameA);
     const url = 'album-details.php?albumR=' + encodeURIComponent(nameA);
     fetch(url)
@@ -330,7 +331,7 @@ function getAlbum(aN){
 
    }
    function getAlbumReview(response){
-    document.getElementById('aN').innerHTML = response;
+    document.getElementById('albumName').innerHTML = response;
    }
 
 function rating() {
