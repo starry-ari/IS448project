@@ -96,6 +96,9 @@ $db = mysqli_connect($host, $user, $pass, $dbname, $port);
     ?>
 
     <!-- Main container for album details -->
+    <input type="hidden" id="aN" name="albumName" />
+
+
     <div id="container">
         <div id="container3">
             <!-- Album details will be populated here by Spotify API -->
@@ -146,7 +149,7 @@ if (!$result) {
 </tr>
    
     <?php
-
+$albumR = $_POST["albumName"];
 $query = "SELECT user, review, rating FROM reviews WHERE albumName = $albumR ";
 $result2 = mysqli_query($db, $query);
 

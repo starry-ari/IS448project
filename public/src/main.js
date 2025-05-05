@@ -249,8 +249,9 @@ fetch(`https://api.spotify.com/v1/albums/${albumId}`, {
    var songs ='';
 
    // Retrieving album name and cover image
+   document.getElementById('aN').value = album.name;
    var albumC = album.images[0].url;
-   var pic = `<?php $albumR = ${album.name}?> <h2>${album.name} - <br> ${album.artists[0].name}</h2><img class="albD" src="${albumC}" alt="${album.name} album" /> <br>`;
+   var pic = `<h2>${album.name} - <br> ${album.artists[0].name}</h2><img class="albD" src="${albumC}" alt="${album.name} album" /> <br>`;
    query += pic;
     
 
