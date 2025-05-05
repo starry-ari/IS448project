@@ -12,6 +12,8 @@ if ($_SERVER['REQUEST_METHOD'] === 'GET' && isset($_GET['albumR'])) {
 }
 */
 
+
+
 // Connect to the database
 $host = getenv('host');
 $user = getenv('user');
@@ -19,6 +21,16 @@ $pass = getenv('pass');
 $dbname = getenv('dbname');
 $port = getenv('port') ?: 3306;
 $db = mysqli_connect($host, $user, $pass, $dbname, $port);
+
+$albumR = $_GET['albumR'] ?? $_SESSION['albumR'] ?? null;
+
+if (!$albumR) {
+    echo "<h2>No album selected.</h2>";
+    exit;
+}
+
+// Escape for use in SQL
+$albumR = mysqli_real_escape_string($db, $albumR);
 
 ?>
 
@@ -150,7 +162,7 @@ if (!$result) {
    
     <?php
 
-$query = "SELECT user, review, rating FROM reviews WHERE albumName = $albumR ";
+$query = "SELECT user, review, rating FROM reviews WHERE albumName = '$albumR' ";
 $result2 = mysqli_query($db, $query);
 
 

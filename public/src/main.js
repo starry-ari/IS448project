@@ -249,7 +249,6 @@ fetch(`https://api.spotify.com/v1/albums/${albumId}`, {
    var songs ='';
 
    // Retrieving album name and cover image
-   document.getElementById('aN').value = album.name;
    var albumC = album.images[0].url;
    var pic = `<h2>${album.name} - <br> ${album.artists[0].name}</h2><img class="albD" src="${albumC}" alt="${album.name} album" /> <br>`;
    query += pic;
@@ -269,6 +268,7 @@ console.log(aN);
     var track = album.tracks.items[i];
  songs+= `<li><h3>${track.name}</h3></li>\n`;
 
+
 }
 
   
@@ -276,16 +276,8 @@ document.querySelector("#tracks ol").innerHTML = songs;
 getAlbum(aN);
 });
 
-fetch(`album-details.php`, {
-    method: 'POST',
-    headers: {
-        'Content-type': 'application/json'
-    },
-    body:'text=' + encodeURIComponent(text),
-})
 
 }
-
 //Star rating functionality
 function starRating() {
     // Add event listeners for each radio button
@@ -314,24 +306,23 @@ function favorite() {
         */
 //Ajax code implementation for album name.
 
+
+
 function getAlbum(aN){
     var nameA=aN.value;
     console.log(nameA);
-    const url = 'album-details.php?albumR=' + encodeURIComponent(nameA);
-    fetch(url)
+    new Ajax.Request ('album-details.php',
 
-    .then(response => {
-        return response.text();
-        
-    }) .then(data => {
-        getAlbumReview(data);
-    })
-    
-
+        {
+            method: "GET",
+            parameters: {albumR: nameA},
+            onSuccess: getAlbumReview
+        }
+    );
 
    }
-   function getAlbumReview(response){
-    document.getElementById('albumName').innerHTML = response;
+   function getAlbumReview(ajax){
+
    }
 
 function rating() {
