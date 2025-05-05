@@ -96,9 +96,7 @@ $db = mysqli_connect($host, $user, $pass, $dbname, $port);
     ?>
 
     <!-- Main container for album details -->
-     <form method="post" action="review.php">
-    <input type="hidden" id="aN" name="albumName" />
-</form>
+ 
 
     <div id="container">
         <div id="container3">
@@ -114,6 +112,9 @@ $db = mysqli_connect($host, $user, $pass, $dbname, $port);
                 
   
                 </script>
+                    <form method="post" action="review.php">
+    <input type="hidden" id="aN" name="albumName" />
+</form>
             </div>
             <div id="container2">
                 <h2>Song List:</h2>
