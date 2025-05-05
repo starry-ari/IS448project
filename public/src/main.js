@@ -268,7 +268,7 @@ console.log(aN);
 
     var track = album.tracks.items[i];
  songs+= `<li><h3>${track.name}</h3></li>\n`;
-
+ document.querySelector('input[name="albumName"]').value = album.name;
 
 }
 
