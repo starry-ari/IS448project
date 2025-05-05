@@ -24,6 +24,8 @@ $db = mysqli_connect($host, $user, $pass, $dbname, $port);
 
 
 
+
+$albumR = mysqli_real_escape_string($db, $albumR);
 ?>
 
 
