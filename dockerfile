@@ -2,8 +2,11 @@ FROM php:8.2-apache
 
 RUN docker-php-ext-install mysqli
 
-# Copy everything from one place
-COPY . /var/www/html/
+# Copy app files from public/src/
+COPY public/src/ /var/www/html/
+
+# Copy index.php from root
+COPY index.php /var/www/html/index.php
 
 RUN echo "Listen \${PORT}" > /etc/apache2/ports.conf && \
     echo '<VirtualHost *:${PORT}>\n\
