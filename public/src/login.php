@@ -1,76 +1,55 @@
 <?php
-//Creating session.
-		
-        session_start();
-            
+session_start(); // FIXED: was called twice
 
-
-session_start();
 // Connect to the database
-$host = getenv('host');
-$user = getenv('user');
-$pass = getenv('pass');
+$host   = getenv('host');
+$user   = getenv('user');
+$pass   = getenv('pass');
 $dbname = getenv('dbname');
-$port = getenv('port') ?: 3306;
+$port   = getenv('port') ?: 3306;
+
 $db = mysqli_connect($host, $user, $pass, $dbname, $port);
-  if (mysqli_connect_errno())
-            exit("Error - Could not connect to MySQL");
-            $username = htmlspecialchars($_POST['user']);
-            $password = htmlspecialchars($_POST['psw']);
-            
-            $username = mysqli_real_escape_string($db,$username);
-            $password = mysqli_real_escape_string($db,$password);
-          
-            if(empty($username)) {
-                //Missing username.
-                ?>
-                <p> Please enter your username! </p>
-                <?php
-            }
-            else {
-                if(empty($password)) {
-                    //Missing password.
-                    ?>
-                    <p>  Please enter your password! </p>
-                    <?php
-                }
-                else {
-                    #Construct SQL query to check database for username and password match.
-                    $query = "SELECT * FROM users WHERE username = '$username' AND password = '$password'";
-                    
-                    #Run constructed query.
-                    $result = mysqli_query($db, $query);
-                    
-                    #If one result is returned, there is a match.
-                    if(mysqli_num_rows($result) === 1) {
-                        #Retrieving result from database.
-                        $row = mysqli_fetch_assoc($result);
-                        #Verifying that username and password match.
-                        if($row['username'] === $username && $row['password'] === $password) {
-                            
-                            //Successful login.
-                           
-                            $_SESSION['username']=$username;
-                         
-                                   header("Location: ./index.php");
-                                   exit();   
-                     
-                        }
-                        else {
-                            //Unsuccessful login.
-                            ?>
-                            <p> Invalid username and/or password. </p>
-                            <?php
-                        }
-                    }
-                    else {
-                        //Unsuccessful login.
-                        ?>
-                        <p> Invalid username and/or password. </p>
-                        <?php
-                    }
-                }
-            }
-            ?>
-</body>
-</html>
+if (!$db) {
+    exit("Error - Could not connect to MySQL");
+}
+
+// FIXED: Read raw POST values — htmlspecialchars() and mysqli_real_escape_string()
+// are not needed here; prepared statements handle injection safely.
+$username = trim($_POST['user'] ?? '');
+$password = trim($_POST['psw']  ?? '');
+
+if (empty($username)) {
+    exit("Please enter your username!");
+}
+if (empty($password)) {
+    exit("Please enter your password!");
+}
+
+// FIXED: Use a prepared statement — no raw variables in SQL
+$stmt = $db->prepare("SELECT id, username, password FROM users WHERE username = ?");
+$stmt->bind_param("s", $username);
+$stmt->execute();
+$result = $stmt->get_result();
+
+if ($result->num_rows === 1) {
+    $row = $result->fetch_assoc();
+
+    // FIXED: Use password_verify() to check against the bcrypt hash from createAcc.php
+    if (password_verify($password, $row['password'])) {
+        $_SESSION['user_id']  = $row['id'];
+        $_SESSION['username'] = $row['username'];
+
+        $stmt->close();
+        $db->close();
+        header("Location: ./index.php");
+        exit();
+    } else {
+        $stmt->close();
+        $db->close();
+        exit("Invalid username and/or password.");
+    }
+} else {
+    $stmt->close();
+    $db->close();
+    exit("Invalid username and/or password.");
+}

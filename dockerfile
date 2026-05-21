@@ -1,6 +1,6 @@
 FROM php:8.2-apache
 
-COPY . /var/www/html/
+COPY public/src/ /var/www/html/
 
 RUN echo "Listen \${PORT}" > /etc/apache2/ports.conf && \
     echo '<VirtualHost *:${PORT}>\n\
