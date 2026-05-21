@@ -1,8 +1,12 @@
-FROM php:8.4-cli
+FROM php:8.2-apache
 
-WORKDIR /var/www/html
-COPY . .
-RUN docker-php-ext-install mysqli
-EXPOSE 8080
+COPY . /var/www/html/
 
-CMD ["php", "-S", "0.0.0.0:8080", "-t", "public/src"]
+RUN echo "Listen \${PORT}" > /etc/apache2/ports.conf && \
+    echo '<VirtualHost *:${PORT}>\n\
+    DocumentRoot /var/www/html\n\
+    </VirtualHost>' > /etc/apache2/sites-enabled/000-default.conf
+
+EXPOSE ${PORT}
+
+CMD ["apache2-foreground"]
