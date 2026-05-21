@@ -8,7 +8,7 @@
     <link rel="icon" type="image/x-icon" href="./assets/images/logo.png">
     <title>High Fidelity</title>
     <script src="https://code.jquery.com/jquery-3.7.1.min.js"></script>
-    <script src="./main.js"></script>
+    <script src="./public/src/main.js"></script>
    
     <link rel="stylesheet" href="./public/src/style.css">
 </head>
@@ -18,8 +18,8 @@
 <?php if (isset($_SESSION['username'])): ?>
   <div class="navbar">
     <ul>
-      <li><img class="logo" src="./assets/images/logo.png"/></li>
-      <li><a href="index.php">Home</a></li>
+      <li><img class="logo" src="./public/src/assets/images/logo.png"/></li>
+      <li><a href=".index.php">Home</a></li>
       <li><a href="./public/src/albums.php">Albums</a></li>
     </ul>
     <div class="search">
@@ -34,7 +34,7 @@
   <div class="navbar">
     <ul>
       <li><img class="logo" src="./public/src/assets/images/logo.png"/></li>
-      <li><a href="./public/src/index.php">Home</a></li>
+      <li><a href="index.php">Home</a></li>
       <li><a href="./public/src/CreateProfile.html">Create Account</a></li>
       <li><a href="./public/src/albums.php">Albums</a></li>
     </ul>
@@ -55,7 +55,7 @@
         <br>
         Discover new artists.
     </h2>
-    <a href="albums.php"><button>GET STARTED</button></a>
+    <a href="./public/src/albums.php"><button>GET STARTED</button></a>
 </div>
 
 <script>
@@ -63,7 +63,7 @@
     if (event.key === 'Enter') {
       const searchTerm = document.querySelector("#searchbox").value;
       localStorage.setItem('term', searchTerm);
-      window.location.href = './album-results.php';
+      window.location.href = './public/src/album-results.php';
     }
   });
 </script>
