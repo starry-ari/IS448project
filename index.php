@@ -20,29 +20,29 @@
     <ul>
       <li><img class="logo" src="./assets/images/logo.png"/></li>
       <li><a href="index.php">Home</a></li>
-      <li><a href="albums.php">Albums</a></li>
+      <li><a href="./public/src/albums.php">Albums</a></li>
     </ul>
     <div class="search">
       <input type="text" id="searchbox" placeholder="Search for albums here..." onkeypress="handleKeyPress(event)">
     </div>
-    <img id="pfp" src="./assets/images/pfp.png" alt="Profile Picture">
-    <a id="Hsignin" href="./Profilepage.php"><?php echo htmlspecialchars($_SESSION['username']); ?></a>
-    <a href="logout.php">Logout</a>
+    <img id="pfp" src="./public/src/assets/images/pfp.png" alt="Profile Picture">
+    <a id="Hsignin" href="./public/src/Profilepage.php"><?php echo htmlspecialchars($_SESSION['username']); ?></a>
+    <a href="./public/src/logout.php">Logout</a>
   </div>
 
 <?php else: ?>
   <div class="navbar">
     <ul>
-      <li><img class="logo" src="./assets/images/logo.png"/></li>
-      <li><a href="index.php">Home</a></li>
-      <li><a href="CreateProfile.html">Create Account</a></li>
-      <li><a href="albums.php">Albums</a></li>
+      <li><img class="logo" src="./public/src/assets/images/logo.png"/></li>
+      <li><a href="./public/src/index.php">Home</a></li>
+      <li><a href="./public/src/CreateProfile.html">Create Account</a></li>
+      <li><a href="./public/src/albums.php">Albums</a></li>
     </ul>
     <div class="search">
       <input type="text" id="searchbox" placeholder="Search for albums here..." onkeypress="handleKeyPress(event)">
     </div>
-    <img id="pfp" src="./assets/images/pfp.png" alt="Profile Picture">
-    <a id="Hsignin" href="./AccountLogin.html">Sign In</a>
+    <img id="pfp" src="./public/src/assets/images/pfp.png" alt="Profile Picture">
+    <a id="Hsignin" href="./public/src/AccountLogin.html">Sign In</a>
   </div>
 <?php endif; ?>
 
