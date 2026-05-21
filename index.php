@@ -22,7 +22,7 @@ IS 448 High Fidelity project
     
 
     <!-- Link to the external CSS stylesheet -->
-    <link rel="stylesheet" href="style.css">
+    <link rel="stylesheet" href="public/src/style.css">
 </head>
 <body>
     
