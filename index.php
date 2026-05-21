@@ -11,7 +11,7 @@
     <script src="./main.js"></script>
     <!-- FIXED: CSS path was pointing to public/src/style.css but all files
          are served from public/src/ so the path should be relative -->
-    <link rel="stylesheet" href="style.css">
+    <link rel="stylesheet" href="./style.css">
 </head>
 <body>
 
