@@ -1,80 +1,79 @@
 <?php
-// Start the session
 session_start();
 
-// Connect to the RDS database
-$host = getenv('host');
-$user = getenv('user');
-$pass = getenv('pass');
+// Connect to the database
+$host   = getenv('host');
+$user   = getenv('user');
+$pass   = getenv('pass');
 $dbname = getenv('dbname');
-$port = getenv('port') ?: 3306;
+$port   = getenv('port') ?: 3306;
+
 $db = new mysqli($host, $user, $pass, $dbname, $port);
-
-
 if ($db->connect_error) {
-    die("Error: Could not connect to MySQL - " . $db->connect_error );
+    exit("Error: Could not connect to MySQL - " . $db->connect_error);
 }
 
+// Read raw POST values — htmlspecialchars() and mysqli_real_escape_string()
+// are not needed here; prepared statements handle injection safely.
+// htmlspecialchars() on input can corrupt passwords/usernames with special chars.
+$email    = trim($_POST['email']    ?? '');
+$username = trim($_POST['user']     ?? '');
+$password = trim($_POST['psw']      ?? '');
 
-$email = htmlspecialchars($_POST['email']);
-$username = htmlspecialchars($_POST['user']);
-$password = htmlspecialchars($_POST['psw']);
-
-
-$email = mysqli_real_escape_string($db, $email);
-$username = mysqli_real_escape_string($db, $username);
-$password = mysqli_real_escape_string($db, $password);
-
-
-// Validate input (basic example)
 if (empty($email) || empty($username) || empty($password)) {
     exit("Error: All fields are required.");
 }
 
+// Validate email format
+if (!filter_var($email, FILTER_VALIDATE_EMAIL)) {
+    exit("Error: Invalid email address.");
+}
 
-
-
-// Create the `users` table if it does not exist
+// Create the users table if it doesn't exist
 $createTable = "
 CREATE TABLE IF NOT EXISTS users (
-    id INT AUTO_INCREMENT PRIMARY KEY,
-    email VARCHAR(100) NOT NULL UNIQUE,
-    username VARCHAR(50) NOT NULL UNIQUE,
+    id       INT AUTO_INCREMENT PRIMARY KEY,
+    email    VARCHAR(100) NOT NULL UNIQUE,
+    username VARCHAR(50)  NOT NULL UNIQUE,
     password VARCHAR(255) NOT NULL
 )";
-mysqli_query($db, $createTable);
-
-if (mysqli_error($db)) {
-    die("Error creating table: " . mysqli_error($db));
+if (!$db->query($createTable)) {
+    exit("Error creating table: " . $db->error);
 }
 
-// Check if the username already exists
-$sameUser = "SELECT * FROM users WHERE email = '$email' OR username = '$username'";
-$result = mysqli_query($db, $sameUser);
+// Check for duplicate email/username using a prepared statement
+$stmt = $db->prepare("SELECT id FROM users WHERE email = ? OR username = ?");
+$stmt->bind_param("ss", $email, $username);
+$stmt->execute();
+$stmt->store_result();
 
-if (mysqli_num_rows($result) > 0) {
-    echo "<span id='error'>Error: Username is already taken. Please choose a different username.</span>";
+if ($stmt->num_rows > 0) {
+    $stmt->close();
+    // exit so code doesn't fall through; don't echo raw HTML from a PHP backend file
+    exit("Error: Email or username is already taken. Please choose a different one.");
 }
-else{
+$stmt->close();
 
+// Hash the password — NEVER store plain text passwords
+$hashedPassword = password_hash($password, PASSWORD_BCRYPT);
 
-// Insert user data into the database
+//  prepared statement to insert
+$stmt = $db->prepare("INSERT INTO users (email, username, password) VALUES (?, ?, ?)");
+$stmt->bind_param("sss", $email, $username, $hashedPassword);
 
-$query = "INSERT INTO users (email, username, password) VALUES ('$email', '$username', '$password')";
-
-if (mysqli_query($db, $query)) {
-
-    $_SESSION['user_id'] = mysqli_insert_id($db);
+if ($stmt->execute()) {
+    $_SESSION['user_id']  = $db->insert_id;
     $_SESSION['username'] = $username;
-    $_SESSION['email'] = $email;
-    $_SESSION['password'] = $password;
+    $_SESSION['email']    = $email;
+   
 
- // Redirect to a welcome page
- header('Location: Profilepage.php');
+    $stmt->close();
+    $db->close();
+    header('Location: Profilepage.php');
     exit();
-    
 } else {
-    die("Error: " . mysqli_error($db));
-}
-
+    $error = $stmt->error;
+    $stmt->close();
+    $db->close();
+    exit("Error: " . $error);
 }
